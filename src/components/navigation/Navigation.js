@@ -6,7 +6,7 @@ import {LinkContainer} from 'react-router-bootstrap'
 export default function Navigation() {
 
     return (
-        <Navbar bg="light" expand="lg">
+        <Navbar bg="primary" variant="dark" expand="lg">
             <Container>
                 <Navbar.Brand href="#home">Homework tracker</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
@@ -15,6 +15,18 @@ export default function Navigation() {
                         <LinkContainer to="/groups">
                             <Nav.Link>Группы</Nav.Link>
                         </LinkContainer>
+                        <NavDropdown title="Обзор" id="basic-nav-dropdown">
+                            <LinkContainer to="/courses">
+                                <NavDropdown.Item>Курсы</NavDropdown.Item>
+                            </LinkContainer>
+                            <NavDropdown.Divider />
+                            <LinkContainer to="/teachers">
+                                <NavDropdown.Item>Преподаватели</NavDropdown.Item>
+                            </LinkContainer>
+                            <LinkContainer to="/students">
+                                <NavDropdown.Item>Студенты</NavDropdown.Item>
+                            </LinkContainer>
+                        </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
