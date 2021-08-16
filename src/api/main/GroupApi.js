@@ -7,3 +7,20 @@ export function loadAllGroups() {
             alert(error)
         );
 }
+
+export function saveGroup(group) {
+    const requestOptions = {
+        method: group.id === null ? 'POST' : 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(group)
+    };
+    return fetch(apiBaseUrlGroups, requestOptions)
+        .then(response => response.json());
+}
+
+export function deleteGroup(id) {
+    return fetch(apiBaseUrlGroups + id, {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json'}
+    });
+}

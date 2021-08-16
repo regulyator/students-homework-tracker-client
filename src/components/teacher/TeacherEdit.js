@@ -2,7 +2,7 @@ import {Form} from "react-bootstrap";
 import {useState} from "react";
 
 export default function TeacherEdit(props) {
-    const [teacher, setTeacher] = useState(props.teacher);
+    const [teacher] = useState(props.teacher);
     const [teacherFio, setTeacherFio] = useState(props.teacher.fio);
     const [teacherEmail, setTeacherEmail] = useState(props.teacher.email);
 

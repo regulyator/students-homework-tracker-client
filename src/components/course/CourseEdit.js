@@ -2,7 +2,7 @@ import {Form} from "react-bootstrap";
 import {useState} from "react";
 
 export default function CourseEdit(props) {
-    const [course, setCourse] = useState(props.course);
+    const [course] = useState(props.course);
     const [courseName, setCourseName] = useState(props.course.courseName);
     const [courseDescription, setCourseDescription] = useState(props.course.courseDescription);
 

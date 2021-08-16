@@ -1,4 +1,4 @@
-import {Button, ButtonGroup, Container, InputGroup, Table} from "react-bootstrap";
+import {Button, ButtonGroup, Container, Table} from "react-bootstrap";
 import {useEffect, useState} from "react";
 import {deleteCourse, loadAllCourses, saveCourse} from "../../api/main/CourseApi";
 import CourseEdit from "./CourseEdit";
