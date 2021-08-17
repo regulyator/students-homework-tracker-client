@@ -2,6 +2,8 @@ import {Form, Button} from "react-bootstrap";
 import {useState} from "react";
 import moment from "moment";
 import {saveGroup} from "../../api/main/GroupApi";
+import GroupTeachers from "./GroupTeachers";
+import GroupStudents from "./GroupStudents";
 
 export default function GroupEdit(props) {
     const [courses] = useState(props.courses);
@@ -37,6 +39,12 @@ export default function GroupEdit(props) {
         saveGroup(group).then()
     }
 
+    const handleSaveGroupStudents = (groupStudents) => {
+        setGroupStudents(groupStudents);
+        group.students = groupStudents;
+        saveGroup(group).then();
+    }
+
     return (
         <Form onSubmit={handleSave}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -58,7 +66,13 @@ export default function GroupEdit(props) {
                 <Form.Label>Дата окончания</Form.Label>
                 <Form.Control type="date" value={moment(group.groupEnd).format('YYYY-MM-DD')} onChange={handleChangeDateEnd}/>
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <Form.Group className="mb-3">
+                <GroupTeachers teachers={groupTeachers}/>
+            </Form.Group>
+            <Form.Group className="mb-3">
+                <GroupStudents students={groupStudents} saveGroupStudents={handleSaveGroupStudents}/>
+            </Form.Group>
+            <Button variant="outline-success" type="submit">
                 Сохранить
             </Button>
         </Form>
