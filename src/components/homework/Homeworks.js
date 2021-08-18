@@ -61,7 +61,7 @@ export default function Homeworks(props) {
                                 <Accordion.Header>{homework.homeworkName}
                                 </Accordion.Header>
                                 <Accordion.Body>
-                                    <HomeworkEdit homework={homework}/>
+                                    <HomeworkEdit homework={homework} students={group.students}/>
                                 </Accordion.Body>
                             </Accordion.Item>
                         ))}

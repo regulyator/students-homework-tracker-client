@@ -20,10 +20,10 @@ export default function Students(props) {
             deleteStudent(student.id).then()
         }
 
-        let filteredTeachers = students.filter(function (value, index) {
-            return index !== idx;
+        let filteredStudents = students.filter(function (value, index) {
+            return (student.id === null) ? index !== idx : value.id !== student.id;
         });
-        setStudents(filteredTeachers);
+        setStudents(filteredStudents);
     }
 
     const handleSaveStudent = (student) => {
@@ -34,7 +34,8 @@ export default function Students(props) {
         <Container>
             <div>
                 <h4 className='mt-1 mb-1 float-start'>Студенты</h4>
-                <Button variant="outline-success" size="sm" onClick={addNewStudent} className='mt-1 mb-1 float-end'>Добавить</Button>
+                <Button variant="outline-success" size="sm" onClick={addNewStudent}
+                        className='mt-1 mb-1 float-end'>Добавить</Button>
             </div>
             <Table striped hover>
                 <thead>
