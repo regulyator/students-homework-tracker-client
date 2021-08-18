@@ -1,9 +1,11 @@
-import {Form, Button} from "react-bootstrap";
-import {useState} from "react";
+import {Form, Button, ButtonGroup} from "react-bootstrap";
+import {useEffect, useState} from "react";
 import moment from "moment";
 import {saveGroup} from "../../api/main/GroupApi";
 import GroupTeachers from "./GroupTeachers";
 import GroupStudents from "./GroupStudents";
+import {loadAllStudents} from "../../api/main/StudentApi";
+import Homeworks from "../homework/Homeworks";
 
 export default function GroupEdit(props) {
     const [courses] = useState(props.courses);
@@ -13,6 +15,10 @@ export default function GroupEdit(props) {
     const [groupEnd, setGroupEnd] = useState(props.group.groupEnd);
     const [groupTeachers, setGroupTeachers] = useState(props.group.teachers);
     const [groupStudents, setGroupStudents] = useState(props.group.students);
+
+    useEffect(() => {
+        setGroupCourse(props.group.course)
+    }, [props.group]);
 
     const handleChangeCourse = (event) => {
         let newCourseSelected = courses.find((course) => {
@@ -36,12 +42,18 @@ export default function GroupEdit(props) {
 
     const handleSave = (event) => {
         event.preventDefault()
-        saveGroup(group).then()
+        saveGroup(group).then(group => setGroup(group))
     }
 
     const handleSaveGroupStudents = (groupStudents) => {
         setGroupStudents(groupStudents);
         group.students = groupStudents;
+        saveGroup(group).then(group => setGroup(group));
+    }
+
+    const handleSaveGroupTeachers = (groupTeachers) => {
+        setGroupTeachers(groupTeachers);
+        group.teachers = groupTeachers;
         saveGroup(group).then();
     }
 
@@ -60,17 +72,18 @@ export default function GroupEdit(props) {
             </Form.Group>
             <Form.Group className="mb-3">
                 <Form.Label>Дата начала</Form.Label>
-                <Form.Control type="date" value={moment(group.groupStart).format('YYYY-MM-DD')} onChange={handleChangeDateStart}/>
+                <Form.Control type="date" value={moment(groupStart).format('YYYY-MM-DD')} onChange={handleChangeDateStart}/>
             </Form.Group>
             <Form.Group className="mb-3">
                 <Form.Label>Дата окончания</Form.Label>
-                <Form.Control type="date" value={moment(group.groupEnd).format('YYYY-MM-DD')} onChange={handleChangeDateEnd}/>
+                <Form.Control type="date" value={moment(groupEnd).format('YYYY-MM-DD')} onChange={handleChangeDateEnd}/>
             </Form.Group>
             <Form.Group className="mb-3">
-                <GroupTeachers teachers={groupTeachers}/>
-            </Form.Group>
-            <Form.Group className="mb-3">
+            <ButtonGroup aria-label="Basic example">
+                <GroupTeachers teachers={groupTeachers} saveGroupTeachers={handleSaveGroupTeachers}/>
                 <GroupStudents students={groupStudents} saveGroupStudents={handleSaveGroupStudents}/>
+                <Homeworks group={group}/>
+            </ButtonGroup>
             </Form.Group>
             <Button variant="outline-success" type="submit">
                 Сохранить

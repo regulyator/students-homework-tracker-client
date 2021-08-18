@@ -16,7 +16,7 @@ export default function Groups(props) {
 
     const addNewGroup = (event) => {
         event.preventDefault();
-        setGroups([...groups, {id: null, course: null, groupStart: null, groupEnd: null}])
+        setGroups([...groups, {id: null, course: null, groupStart: null, groupEnd: null, students: [], teachers: []}])
     }
 
     return (
