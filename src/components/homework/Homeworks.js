@@ -1,8 +1,7 @@
-import {Button, Modal, ListGroup, Accordion} from "react-bootstrap";
+import {Accordion, Button, Modal} from "react-bootstrap";
 import {useEffect, useState} from "react";
 import moment from "moment";
 import {loadAllGroupHomeWork} from "../../api/main/HomeworkApi";
-import GroupEdit from "../group/GroupEdit";
 import HomeworkEdit from "./HomeworkEdit";
 
 export default function Homeworks(props) {
@@ -18,21 +17,22 @@ export default function Homeworks(props) {
         if (group.id !== null) {
             loadAllGroupHomeWork(group.id)
                 .then(homeworks => {
-                    console.log(homeworks)
                     setHomeworks(homeworks)
                 })
         }
     }, [props.group.id]);
 
     const addHomework = (event) => {
-        setHomeworks([...homeworks, {id: null,
+        setHomeworks([...homeworks, {
+            id: null,
             homeworkName: 'НОВАЯ ДОМАШНЯЯ РАБОТА',
             homeworkDescription: '',
             homeworkTag: '',
             homeworkStart: group.groupStart,
             homeworkEnd: group.groupEnd,
             groupId: group.id,
-            students: []}])
+            students: []
+        }])
     }
 
 
@@ -54,7 +54,8 @@ export default function Homeworks(props) {
                 </Modal.Header>
                 <Modal.Body>
 
-                    <Button variant="outline-success" size="sm" className='mt-1 mb-1' onClick={addHomework}>Добавить</Button>
+                    <Button variant="outline-success" size="sm" className='mt-1 mb-1'
+                            onClick={addHomework}>Добавить</Button>
                     <Accordion defaultActiveKey="0">
                         {homeworks?.map((homework, idx) => (
                             <Accordion.Item eventKey={idx}>

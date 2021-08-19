@@ -8,10 +8,13 @@ export default function Navigation() {
     return (
         <Navbar bg="primary" variant="dark" expand="lg">
             <Container>
-                <Navbar.Brand href="#home">Homework tracker</Navbar.Brand>
+                <Navbar.Brand>Homework tracker</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
+                        <LinkContainer to="/opentasks">
+                            <Nav.Link>PR для проверки</Nav.Link>
+                        </LinkContainer>
                         <LinkContainer to="/groups">
                             <Nav.Link>Группы</Nav.Link>
                         </LinkContainer>
@@ -19,7 +22,7 @@ export default function Navigation() {
                             <LinkContainer to="/courses">
                                 <NavDropdown.Item>Курсы</NavDropdown.Item>
                             </LinkContainer>
-                            <NavDropdown.Divider />
+                            <NavDropdown.Divider/>
                             <LinkContainer to="/teachers">
                                 <NavDropdown.Item>Преподаватели</NavDropdown.Item>
                             </LinkContainer>

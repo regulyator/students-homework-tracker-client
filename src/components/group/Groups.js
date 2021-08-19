@@ -1,4 +1,4 @@
-import {Accordion, Container, Form, Button} from "react-bootstrap";
+import {Accordion, Button, Container} from "react-bootstrap";
 import {useEffect, useState} from "react";
 import {loadAllGroups} from "../../api/main/GroupApi";
 import moment from "moment";
@@ -10,8 +10,10 @@ export default function Groups(props) {
     const [courses, setCourses] = useState([]);
 
     useEffect(() => {
+        loadAllCourses().then(courses => setCourses(courses))
+            .then(() => loadAllGroups().then(groups => setGroups(groups)));
         loadAllGroups().then(groups => setGroups(groups));
-        loadAllCourses().then(courses => setCourses(courses));
+
     }, []);
 
     const addNewGroup = (event) => {

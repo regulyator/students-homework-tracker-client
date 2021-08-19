@@ -5,6 +5,7 @@ import Groups from "./group/Groups";
 import Teachers from "./teacher/Teachers";
 import Students from "./student/Students";
 import Courses from "./course/Courses";
+import VerifyTasks from "./verifytask/VerifyTasks";
 
 export default class HwTrackerApp extends React.Component {
 
@@ -17,6 +18,7 @@ export default class HwTrackerApp extends React.Component {
                     <Route exact path="/teachers" component={Teachers}/>
                     <Route exact path="/students" component={Students}/>
                     <Route exact path="/courses" component={Courses}/>
+                    <Route exact path="/opentasks" component={VerifyTasks}/>
                 </Switch>
             </Router>
         );

@@ -34,7 +34,8 @@ export default function Courses(props) {
         <Container>
             <div>
                 <h4 className='mt-1 mb-1 float-start'>Курсы</h4>
-                <Button variant="outline-success" size="sm" onClick={addNewCourse} className='mt-1 mb-1 float-end'>Добавить</Button>
+                <Button variant="outline-success" size="sm" onClick={addNewCourse}
+                        className='mt-1 mb-1 float-end'>Добавить</Button>
             </div>
             <Table striped hover>
                 <thead>
