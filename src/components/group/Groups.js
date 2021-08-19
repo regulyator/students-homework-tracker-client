@@ -18,7 +18,7 @@ export default function Groups(props) {
 
     const addNewGroup = (event) => {
         event.preventDefault();
-        setGroups([...groups, {id: null, course: null, groupStart: null, groupEnd: null, students: [], teachers: []}])
+        setGroups([...groups, {id: null, groupName: "НОВАЯ ГРУППА", course: null, groupStart: null, groupEnd: null, students: [], teachers: []}])
     }
 
     return (
@@ -32,13 +32,7 @@ export default function Groups(props) {
             <Accordion defaultActiveKey="0">
                 {groups?.map((group, idx) => (
                     <Accordion.Item eventKey={idx}>
-                        <Accordion.Header>{group.id !== null ?
-                            (group?.course?.courseName
-                                + " ("
-                                + moment(group.groupStart).format('DD.MM.YYYY')
-                                + " - "
-                                + moment(group.groupEnd).format('DD.MM.YYYY')
-                                + ")") : 'НОВАЯ ГРУППА'}
+                        <Accordion.Header>{group?.groupName}
                         </Accordion.Header>
                         <Accordion.Body>
                             <GroupEdit group={group} courses={courses}/>

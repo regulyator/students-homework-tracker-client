@@ -1,7 +1,7 @@
 import {Button, Form, Tab, Tabs} from "react-bootstrap";
 import {useState} from "react";
 import moment from "moment";
-import {saveHomework} from "../../api/main/HomeworkApi";
+import {saveHomework} from "../../api/homework/HomeworkApi";
 import StudentsGitHub from "./StudentsGitHub";
 
 export default function HomeworkEdit(props) {
@@ -16,6 +16,7 @@ export default function HomeworkEdit(props) {
 
     const handleSave = (event) => {
         event.preventDefault();
+        console.log(homework)
         saveHomework(homework).then(homework => setHomework(homework));
     }
 
@@ -46,13 +47,13 @@ export default function HomeworkEdit(props) {
     const handleChangeDateStart = (event) => {
         let newDateStart = event.target.value;
         setHomeworkStart(newDateStart);
-        homework.groupStart = newDateStart;
+        homework.homeworkStart = newDateStart;
     }
 
     const handleChangeDateEnd = (event) => {
         let newDateEnd = event.target.value;
         setHomeworkEnd(newDateEnd);
-        homework.groupEnd = newDateEnd;
+        homework.homeworkEnd = newDateEnd;
     }
 
 

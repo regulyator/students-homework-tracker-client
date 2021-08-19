@@ -8,6 +8,14 @@ export function loadAllGroups() {
         );
 }
 
+export function loadGroupById(groupId) {
+    return fetch(apiBaseUrlGroups + groupId)
+        .then(response => response.json())
+        .catch(error =>
+            alert(error)
+        );
+}
+
 export function saveGroup(group) {
     const requestOptions = {
         method: group.id === null ? 'POST' : 'PUT',

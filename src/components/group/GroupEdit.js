@@ -9,6 +9,7 @@ import Homeworks from "../homework/Homeworks";
 export default function GroupEdit(props) {
     const [courses] = useState(props.courses);
     const [group, setGroup] = useState(props.group);
+    const [groupName, setGroupName] = useState(props.group.groupName);
     const [groupCourse, setGroupCourse] = useState(props.group.course);
     const [groupStart, setGroupStart] = useState(props.group.groupStart);
     const [groupEnd, setGroupEnd] = useState(props.group.groupEnd);
@@ -25,6 +26,12 @@ export default function GroupEdit(props) {
         })
         setGroupCourse(newCourseSelected)
         group.course = newCourseSelected
+    }
+
+    const handleChangeName = (event) => {
+        let newName = event.target.value
+        setGroupName(newName)
+        group.groupName = newName
     }
 
     const handleChangeDateStart = (event) => {
@@ -58,6 +65,11 @@ export default function GroupEdit(props) {
 
     return (
         <Form onSubmit={handleSave}>
+            <Form.Group className="mb-3">
+                <Form.Label>Имя группы</Form.Label>
+                <Form.Control type="text" value={groupName}
+                              onChange={handleChangeName}/>
+            </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Курс</Form.Label>
                 <Form.Control as="select" value={groupCourse.id}

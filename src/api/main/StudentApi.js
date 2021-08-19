@@ -8,6 +8,14 @@ export function loadAllStudents() {
         );
 }
 
+export function loadStudentById(studentId) {
+    return fetch(apiBaseUrlStudent + studentId)
+        .then(response => response.json())
+        .catch(error =>
+            alert(error)
+        );
+}
+
 export function saveStudent(student) {
     const requestOptions = {
         method: student.id === null ? 'POST' : 'PUT',

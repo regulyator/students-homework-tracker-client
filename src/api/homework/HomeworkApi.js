@@ -17,6 +17,14 @@ export function loadAllGroupHomeWork(groupId) {
         );
 }
 
+export function loadHomeWorkById(homeworkId) {
+    return fetch(apiBaseUrlHomeWork + homeworkId)
+        .then(response => response.json())
+        .catch(error =>
+            alert(error)
+        );
+}
+
 export function saveHomework(homework) {
     const requestOptions = {
         method: homework.id === null ? 'POST' : 'PUT',

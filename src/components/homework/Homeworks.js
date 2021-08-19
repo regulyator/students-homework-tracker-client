@@ -1,7 +1,7 @@
 import {Accordion, Button, Modal} from "react-bootstrap";
 import {useEffect, useState} from "react";
 import moment from "moment";
-import {loadAllGroupHomeWork} from "../../api/main/HomeworkApi";
+import {loadAllGroupHomeWork} from "../../api/homework/HomeworkApi";
 import HomeworkEdit from "./HomeworkEdit";
 
 export default function Homeworks(props) {
