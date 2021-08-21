@@ -71,8 +71,8 @@ export default function Task(props) {
                                                            onChange={handleChangeAssignedTeacher}>
                             {assignedTeacherId === null && <option/>}
                             (teachers.map((teacher) =>
-                            <option key={teacher.id}
-                                    value={teacher.id}>{teacher.fio}</option>
+                            <option key={teacher?.id}
+                                    value={teacher.id}>{teacher?.fio}</option>
                             ))
 
                         </Form.Control>) : (

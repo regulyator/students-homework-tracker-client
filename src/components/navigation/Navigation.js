@@ -8,7 +8,7 @@ export default function Navigation(props) {
     const [authenticated, setAuthenticated] = useState(props.authenticated);
 
     useEffect(() => {
-        console.log("nav "+authenticated)
+        console.log("nav " + authenticated)
         setAuthenticated(props.authenticated)
     }, [props.authenticated]);
 
@@ -44,11 +44,26 @@ export default function Navigation(props) {
                                 <NavDropdown.Item>Студенты</NavDropdown.Item>
                             </LinkContainer>
                         </NavDropdown>
-
                     </Nav>}
 
                     <Nav>
-                        {authenticated && <Button variant="outline-dark" onClick={handleLogOut}>Logout</Button>}
+                        {!authenticated &&
+                        <LinkContainer to="/register" variant="dark">
+                            <Nav.Link>Регистрация</Nav.Link>
+                        </LinkContainer>
+                        }
+                    </Nav>
+
+                    <Nav>
+                        {!authenticated &&
+                        <LinkContainer to="/" variant="dark">
+                            <Nav.Link>Вход</Nav.Link>
+                        </LinkContainer>
+                        }
+                    </Nav>
+
+                    <Nav>
+                        {authenticated && <Button variant="outline-dark" onClick={handleLogOut}>Выход</Button>}
                     </Nav>
                 </Navbar.Collapse>
             </Container>
