@@ -1,7 +1,7 @@
 import {Accordion, Button, ButtonGroup, Form} from "react-bootstrap";
 import {useEffect, useState} from "react";
 import {loadStudentById} from "../../api/main/StudentApi";
-import {loadGroupById, saveGroup} from "../../api/main/GroupApi";
+import {loadGroupById} from "../../api/main/GroupApi";
 import {loadHomeWorkById} from "../../api/homework/HomeworkApi";
 import {Github} from "react-bootstrap-icons";
 import {loadAllTeachers} from "../../api/main/TeacherApi";
@@ -15,10 +15,12 @@ export default function Task(props) {
     const [assignedTeacherId, setAssignedTeacherId] = useState(props.task.assignedTeacherId);
     const [verified, setVerified] = useState(props.task.verified);
     const [teachers, setTeachers] = useState([]);
+    const [teacher, setTeacher] = useState(props.teacher);
 
     useEffect(() => {
-        loadPRData()
-    }, [task]);
+        loadPRData();
+        console.log(teacher)
+    }, [task, props.teacher]);
 
     const loadPRData = () => {
         loadStudentById(task.studentId)
@@ -27,13 +29,21 @@ export default function Task(props) {
             .then(group => setGroup(group))
         loadHomeWorkById(task.homeworkId)
             .then(homework => setHomework(homework))
-        loadAllTeachers()
-            .then(teachers => setTeachers(teachers))
+        if (teacher === null) {
+            loadAllTeachers()
+                .then(teachers => setTeachers(teachers))
+        }
+
+    }
+
+    const assignTeacher = (teacherId) => {
+        console.log(teacherId)
+        setAssignedTeacherId(teacherId)
+        task.assignedTeacherId = teacherId
     }
 
     const handleChangeAssignedTeacher = (event) => {
-        setAssignedTeacherId(event.target.value)
-        task.assignedTeacherId = event.target.value
+        assignTeacher(event.target.value)
     }
 
     const handleChangeVerified = (event) => {
@@ -43,6 +53,7 @@ export default function Task(props) {
 
     const handleSave = (event) => {
         event.preventDefault()
+        console.log(task)
         saveTask(task).then(task => setTask(task))
     }
 
@@ -56,14 +67,19 @@ export default function Task(props) {
                 <Form onSubmit={handleSave}>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Проверяющий</Form.Label>
-                        <Form.Control as="select" value={assignedTeacherId}
-                                      onChange={handleChangeAssignedTeacher}>
+                        {teacher === null ? (<Form.Control as="select" value={assignedTeacherId}
+                                                           onChange={handleChangeAssignedTeacher}>
                             {assignedTeacherId === null && <option/>}
-                            {teachers.map((teacher) =>
-                                <option key={teacher.id}
-                                        value={teacher.id}>{teacher.fio}</option>
-                            )}
-                        </Form.Control>
+                            (teachers.map((teacher) =>
+                            <option key={teacher.id}
+                                    value={teacher.id}>{teacher.fio}</option>
+                            ))
+
+                        </Form.Control>) : (
+                            assignedTeacherId === null ?
+                                (<Button className="m-2" size="sm" onClick={() => assignTeacher(teacher.id)}>Взять на
+                                проверку</Button>):(<h6>{teacher.fio}</h6>))}
+
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicCheckbox">
                         <Form.Check type="checkbox" label="Принято" checked={verified} onChange={handleChangeVerified}/>

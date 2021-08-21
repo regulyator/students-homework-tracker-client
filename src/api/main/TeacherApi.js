@@ -8,6 +8,14 @@ export function loadAllTeachers() {
         );
 }
 
+export function loadTeacherById(teacherId) {
+    return fetch(apiBaseUrlTeacher + teacherId)
+        .then(response => response.json())
+        .catch(error =>
+            alert(error)
+        );
+}
+
 export function saveTeacher(teacher) {
     const requestOptions = {
         method: teacher.id === null ? 'POST' : 'PUT',
